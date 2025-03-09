@@ -1,0 +1,184 @@
+#root {
+  width: 100%;
+  
+  text-align: center;
+}
+
+.homepage{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(23, 79, 152);
+}
+.homepage-logo{
+  flex:2;
+  width: 100%;
+  height: 100vh;
+}
+.homepage-logo h1{
+  margin-top: 200px;
+  font-size: 10rem;
+  animation: slideIn 2s forwards;
+}
+@keyframes slideIn{
+  from{
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+      transform: translate(0); 
+      opacity: 1;
+  }
+}
+.homepage-logo h3{
+  font-size: 4rem;
+}
+.signupform{
+  margin: 10px;
+  flex:1;
+  width: 100%;
+  height: 100vh;
+  margin-top: 110px;
+}
+.signupform form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  
+}
+.signupform img{
+  width: 100px;
+  height: 100px;
+}
+ label{
+  margin-top: 10px;
+}
+ input{
+  width: 80%;
+  background-color: transparent;
+  color: white;
+  padding: 7px 10px;
+}
+ button{
+  width: 30%;
+  margin-top: 15px;
+}
+ button:hover{
+  background-color: rgb(11, 44, 87);
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+.signupform a{
+  font-weight: bold;
+}
+.loginPage{
+  background-color: rgb(23, 79, 152);
+  width: 100%;
+  height: 100vh;
+}
+.loginform{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.loginform h1{
+  margin-top: 100px;
+}
+.loginform input{
+  width: 80%;
+  margin-top: 20px;
+}
+.loginform button{
+  width: 30%;
+}
+.taskPage{
+  margin: 0;
+  padding: 0;
+  background-color: rgb(23, 79, 152);
+  width: 100%;
+  height: 500vh;
+}
+.taskPage #logout{
+  width: 10%;
+  display: block;
+  margin-top: 0px;
+  margin-left: 20px;
+  padding: 10px 10px;
+}
+.taskPage li{
+  width:80%;
+  height:45vh;
+  margin: 60px auto;
+  border-radius: 10px;
+  background-color: transparent;
+  list-style: none;
+  box-shadow: 5px 5px 15px rgba(0.3, 0.3, 0.3, 0.3);
+}
+.taskPage li:hover{
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
+  transition: 0.3s ease-in-out;
+}
+.taskList{
+  height: 20%;
+}
+.taskList div{
+  text-align: left;
+  padding:4px 7px;
+  
+}
+.taskList .taskTitle{
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px 10px;
+  font-size: 23px;
+  border-top: 0px solid white;
+  border-right: 0px solid white;
+  border-bottom: 1px solid white;
+  border-left: 0px solid white;
+  
+}
+.taskList .icons{
+  display: flex;
+ justify-content: flex-end;  
+ gap: 40px;
+
+
+}
+.taskList button{
+  width: 10%;
+  
+ 
+}
+.createTask{
+  background-color: rgb(23, 79, 152);
+  width: 100%;
+  height: 100vh;
+}
+
+.createTask form{
+
+ margin-left: auto;
+ margin-right: auto;
+ width: 50%;
+ padding-top: 100px;
+  display: flex;
+  flex-direction:column ;
+  align-items: center;
+}
+.createTask input{
+  margin-top: 20px;
+  padding: 4px 7px;
+  width:50%;
+}
+.createTask button{
+  margin-top: 10px;
+}
+.hide{
+  display: none;
+}
