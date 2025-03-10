@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+
 import { useSelector,useDispatch } from "react-redux";
-import {setTasks,setTitle,setDescription,setDue,setStatus,setCreatedBy,addTask} from '../features/taskSlice';
+import {setTitle,setDescription,setDue,addTask} from '../features/taskSlice';
 export default function CreateTaskPage(){
-    const {tasks,title,description,due,status,created_by}=useSelector((state)=>state.task);
-    const currentUser=useSelector((state) => state.user.id);
+    const {title,description,due}=useSelector((state)=>state.task);
     const dispatch=useDispatch();
 
 

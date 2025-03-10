@@ -5,9 +5,9 @@ import { useNavigate } from "react-router";
 
 export default function Register(props){
     const navigate=useNavigate();
-    const{username,setUsername,validUsername,email,setEmail,validEmail, password, setPassword,validPassword,confPassword, setConfPassword,validConfPassword,
+    const{setUsername,validUsername,setEmail,validEmail, setPassword,validPassword, setConfPassword,validConfPassword,
         usernameFocus,handleUsernameFocus,handleUsernameBlur, emailFocus,handleEmailFocus,handleEmailBlur,passwordFocus,handlePasswordFocus,handlePasswordBlur, confPasswordFocus,handleConfPasswordFocus,
-        handleConfPasswordBlur,handleSignUp,registered,loading}=props;
+        handleConfPasswordBlur,handleSignUp,}=props;
     return(
         <div className="homepage">
             <div className="homepage-logo">

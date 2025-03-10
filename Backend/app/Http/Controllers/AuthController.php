@@ -17,26 +17,25 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6'],
         ]);
     
-        // Create a new user
         $user = new User([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => bcrypt($validated['password']), // Hash the password
+            'password' => bcrypt($validated['password']), 
         ]);
         
         $user->save();
     
-        // Generate a JWT token for the user
+       
         $token = JWTAuth::fromUser ($user);
     
         return response()->json([
             'message' => 'User  successfully registered',
             'user' => $user,
-            'token' => $token, // Include the token in the response
+            'token' => $token, 
         ], 201);
     }
     public function login(Request $request){
@@ -46,7 +45,7 @@ class AuthController extends Controller
         ]);
         try{
             if(!$token=JWTAuth::attempt($validated)){
-                return response()->json(['message'=>'Invalid credentials']);
+                return response()->json(['message'=>'Invalid credentials'],status:404);
               }
               return response()->json([
                 'message'=>'login successful',

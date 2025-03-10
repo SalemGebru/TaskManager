@@ -9,7 +9,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { username, password, validUsername, validPassword, usernameFocus, passwordFocus, loading, error, registered, logged } = useSelector((state) => state.user);
+  const { username, password, validUsername, validPassword, usernameFocus, passwordFocus,  logged } = useSelector((state) => state.user);
 
   const USERNAME_REGEX = /^[a-zA-Z0-9_]{3,20}$/;
   const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -40,7 +40,6 @@ export default function Login() {
 
     
     if (!validUsername || !validPassword) {
-      console.log('Please fill out the required fields correctly');
       alert('Please fill out the required fields correctly');
       return;
     }

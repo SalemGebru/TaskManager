@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setTasks, setTitle, setDescription, setDue, setStatus, editTask, setFilterPending, setFilterCompleted, fetchTasks, deleteTask } from "../features/taskSlice";
+import {  setStatus, editTask, setFilterPending, setFilterCompleted, fetchTasks, deleteTask, updateTask } from "../features/taskSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,19 +15,28 @@ export default function Task() {
     useEffect(() => {
         dispatch(fetchTasks());
     }, []);
+   
 
     const handleStatusToggle = (task) => {
       
         dispatch(setStatus({ id: task.id, status: !task.status }));
     }
+    const handleEdit=(task)=>{
+        setEditTaskId(task.id);
+        setEditedTask({title:task.title,description:task.description,due:task.due});
+    }
 
     const handleSaveChanges = (task) => {
-        dispatch(editTask({ ...task, ...editedTask }));
+        const updatedTask={...task,...editedTask};
+        dispatch(updateTask(updatedTask));
         setEditTaskId(null); 
-        alert('Changes have been saved');
         return;
     }
 
+    useEffect(()=>{
+        dispatch(fetchTasks());
+    },[handleSaveChanges]);
+    
     const handleFilterToggle = (event) => {
         const filterVal = event.target.value;
 
@@ -77,12 +86,12 @@ export default function Task() {
                     <li key={task.id} className="taskList">
                         <div className="taskTitle">
                             {editTaskId === task.id ? (
-                                <input type="text" placeholder="Title" defaultValue={task.title} onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })} />
+                                <input type="text" placeholder="Title" value={editedTask.title} onChange={(e) => setEditedTask(prev=>({...prev,title:e.target.value}))} />
                             ) : task.title}
                         </div>
                         <div className="taskDescription">
                             {editTaskId === task.id ? (
-                                <input type="text" placeholder="Description" defaultValue={task.description} onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })} />
+                                <input type="text" placeholder="Description" value={editedTask.description} onChange={(e) => setEditedTask(prev=>({...prev,description:e.target.value}))} />
                             ) : task.description}
                         </div>
                         <div className="taskStatus">
@@ -90,18 +99,19 @@ export default function Task() {
                         </div>
                         <div className="taskDue">
                             DUE: {editTaskId === task.id ? (
-                                <input type="date" defaultValue={task.due} onChange={(e) => setEditedTask({ ...editedTask, due: e.target.value })} />
+                                <input type="date" value={editedTask.due} onChange={(e) => setEditedTask(prev=>({...prev,due:e.target.value}))} />
                             ) : task.due}
                             <div className="icons">
-                            <button>
-                                <FontAwesomeIcon icon={task.status ? faCircleNotch : faCircleCheck} onClick={() => handleStatusToggle(task)} />
+                            <button onClick={() => handleStatusToggle(task)}>
+                                <FontAwesomeIcon icon={task.status ? faCircleNotch : faCircleCheck}  />
                             </button>
-                            <button onClick={() => setEditTaskId(task.id)}>
+                            <button onClick={() => handleEdit(task)}>
                                 <FontAwesomeIcon icon={faPen} />
                             </button>
                             <button onClick={() => handleDeleteTask(task)}>
                                 <FontAwesomeIcon icon={faTrash} />
                             </button>
+                            {editTaskId===task.id?<button onClick={()=>handleSaveChanges(task)}>Save Changes</button>:""}
                             
                         </div>
                         </div>

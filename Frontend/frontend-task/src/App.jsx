@@ -15,7 +15,7 @@ function App() {
   const navigate=useNavigate();
 
   const {username,email,password,confPassword,validUsername,validEmail,validPassword,validConfPassword,usernameFocus,emailFocus,passwordFocus,confPasswordFocus,
-   loading,error,registered,logged}=useSelector((state)=>state.user);
+   loading,registered}=useSelector((state)=>state.user);
   
 
   const USERNAME_REGEX = /^[a-zA-Z0-9_]{3,20}$/;
@@ -63,7 +63,6 @@ const handleConfPasswordBlur=()=>dispatch(setConfPasswordFocus(false));
 
    
     if (!validUsername || !validEmail || !validPassword || !validConfPassword) {
-        console.log('Please fill out the required fields correctly');
         alert('Please fill out the required fields correctly');
         return; 
     }
@@ -74,21 +73,20 @@ const handleConfPasswordBlur=()=>dispatch(setConfPasswordFocus(false));
   return (
     <>
     
-        <Register username={username} setUsername={(value) => dispatch(setUsername(value))}
+        <Register setUsername={(value) => dispatch(setUsername(value))}
         validUsername={validUsername}
-        email={email} setEmail={(value) => dispatch(setEmail(value))}
+        setEmail={(value) => dispatch(setEmail(value))}
         validEmail={validEmail}
-        password={password} setPassword={(value) => dispatch(setPassword(value))}
+         setPassword={(value) => dispatch(setPassword(value))}
         validPassword={validPassword}
-        confPassword={confPassword} setConfPassword={(value) => dispatch(setConfPassword(value))}
+         setConfPassword={(value) => dispatch(setConfPassword(value))}
         validConfPassword={validConfPassword}
         usernameFocus={usernameFocus} handleUsernameFocus={handleUsernameFocus} handleUsernameBlur={handleUsernameBlur}
         emailFocus={emailFocus} handleEmailFocus={handleEmailFocus} handleEmailBlur={handleEmailBlur}
         passwordFocus={passwordFocus} handlePasswordFocus={handlePasswordFocus} handlePasswordBlur={handlePasswordBlur}
         confPasswordFocus={confPasswordFocus}handleConfPasswordFocus={handleConfPasswordFocus} handleConfPasswordBlur={handleConfPasswordBlur}
         handleSignUp={handleSignUp}
-        registered={registered}
-        loading={loading}/>
+        />
         
    
       

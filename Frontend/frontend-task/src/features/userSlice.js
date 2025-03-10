@@ -1,16 +1,13 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
 
 export const signUp=createAsyncThunk(
     'user/registerUser',
     async(formData,{rejectWithValue})=>{
         try{
-            console.log('trying...');
             const csrfTokenResponse=await axios.get('http://localhost:8000/csrf-token');
             const csrfToken=csrfTokenResponse.data;
             
-            console.log(csrfToken);
 
             const response=await axios.post('http://localhost:8000/api/register',{
                 name:formData.username,
@@ -26,19 +23,16 @@ export const signUp=createAsyncThunk(
             if(response.status==201){
             const token=response.data.token;
             localStorage.setItem('jwtToken',token);
-                console.log('succeed');
                 alert('You have been registered');
                 return response.data;
             }
             else{
-                console.log('fail');
                 alert('Registration failed');
                 return rejectWithValue('Registration failed');
             }
         }catch(error){
 
                 if(error.response){
-                    console.log(error.response.data.message);
                     alert(error.response.data.message||'Registration failed');
                     return rejectWithValue(error.response.data.message||'Registration failed');
                 }
@@ -51,11 +45,9 @@ export const login=createAsyncThunk(
     'user/loginUser',
     async(formData,{rejectWithValue})=>{
         try{
-            console.log('trying');
             const csrfTokenResponse=await axios.get('http://localhost:8000/csrf-token');
             const csrfToken=csrfTokenResponse.data;
             
-            console.log(csrfToken);
 
             const response=await axios.post('http://localhost:8000/api/login',{
                 name:formData.username,
@@ -76,20 +68,16 @@ export const login=createAsyncThunk(
                  return response.data;
             }
             else{
-                console.log(response.data.message);
-                console.log('Login failed');
                 alert(response.data.message);
                 return rejectWithValue('Login failed');
             }
             
         }catch(error){
             if(error.response){
-                console.log(error.response.data.message||'Login failure');
                 alert(error.response.data.message||'Login failure');
                 rejectWithValue(error.response.data.message||'Login failure');
             }
             else{
-                console.log(error.message);
                 alert(error.message);
                 rejectWithValue(error.message);
             }

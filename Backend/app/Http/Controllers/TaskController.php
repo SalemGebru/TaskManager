@@ -72,7 +72,7 @@ class TaskController extends Controller
         return response()->json([
             'message'=>'Task successfully updated',
             'user'=>$tasks
-        ],201);
+        ],200);
     }
 
     public function deleteTasks(Request $request,$id){
